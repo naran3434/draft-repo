@@ -56,4 +56,20 @@
                 }
             }]
         });
+
+        function localFormat(number, allowedDecimal) {
+            if (allowedDecimal === 0) {
+                return Math.round(number).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+            }
+            const parts = number.split(".");
+            return parts[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") +
+                (parts[1] ? "." + parts[1] : "");
+        }
+
+        function formatDate(value){
+            const dateObject = new Date(value);
+            return dateObject.toLocaleString("en-US", {day: "numeric"}) + ', '
+            + dateObject.toLocaleString("en-US", {month: "short"}) + ' '
+                + dateObject.toLocaleString("en-US", {year: "numeric"});
+        }
   </script>
